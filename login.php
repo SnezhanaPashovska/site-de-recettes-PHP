@@ -31,7 +31,7 @@
 <?php else : ?>
 
   <div class="alert alert-success" role="alert">
-  Bonjour <?php echo $_SESSION['LOGGED_USER']; ?> et bienvenue sur le site !
+  Bonjour <?php echo $_SESSION['LOGGED_USER']['email']; ?> et bienvenue sur le site !
       
 	</div>
 
