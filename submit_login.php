@@ -33,7 +33,7 @@ if (isset($postData['email']) && isset($postData['password'])){
       }
     }
     if (!isset($_SESSION)){
-      $errorMessage = sprintf (
+      $_SESSION ['LOGIN_ERROR_MESSAGE'] = sprintf (
         'Les informations envoyées ne permettent pas de vous identifier : (%s %s)',
         $postData['email'],
         strip_tags($postData['password'])

@@ -35,6 +35,13 @@ function getRecipe(array $recipes):array{
     }
   }
   return $valid_recipes;
+};
+
+function redirectToUrl(string $url) : never{
+
+  header("Location: {$url}");
+  exit();
+
 }
 
 /*a functon that is an array and returns an array. To display every recipe that is valid.
