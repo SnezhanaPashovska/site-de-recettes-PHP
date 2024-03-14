@@ -1,8 +1,12 @@
 
 <?php session_start(); // $_SESSION?>
 
-<?php require_once(__DIR__ . '/variables.php');
-      require_once(__DIR__ . '/functions.php');?>
+<?php 
+require_once(__DIR__ . '/config/mysql.php');
+require_once(__DIR__ . '/databaseconnect.php');
+require_once(__DIR__ . '/variables.php');
+require_once(__DIR__ . '/functions.php');?>
+
 
 
 <!DOCTYPE html>
