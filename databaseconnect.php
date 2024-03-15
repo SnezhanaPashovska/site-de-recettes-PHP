@@ -9,7 +9,9 @@ try {
 }
 catch(Exeption $exeption){
   die('Erreur :'. $exeption->getMessage());
-}
+};
+
+
 ?>
 
 
