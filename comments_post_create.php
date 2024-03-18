@@ -5,30 +5,38 @@ require_once(__DIR__ .'/isConnected.php');
 require_once(__DIR__ .'/config/mysql.php');
 require_once(__DIR__.'/databaseconnect.php');
 
-$posData = $_POST;
+$postData = $_POST;
 
 if(
-  !isset($posData['comment']) ||
-  !isset($posData['recipe_id']) ||
-  !is_numeric($posData['recipe_id'])
+  !isset($postData['comment']) ||
+  !isset($postData['recipe_id']) ||
+  !is_numeric($postData['recipe_id']) ||
+  !is_numeric($postData['review'])
+  
 ){
   echo('Le commentaire est invalide.');
   return;
 }
 
-$comment = trim(strip_tags($posData['comment']));
-$recipeId = (int)$posData['recipe_id'];
+$comment = trim(strip_tags($postData['comment']));
+$recipeId = (int)$postData['recipe_id'];
+$review = (int)$postData['review'];
+
+if($review <1 || $review >5){
+  echo 'La note doit être compris entre 1 et 5.';
+}
 
 if($comment === ''){
   echo 'Le commentaire ne peut pas être vide.';
   return;
 }
 
-$insertRecipe = $mysqlClient->prepare('INSERT INTO comments(comment, recipe_id, user_id) VALUES (:comment, :recipe_id, :user_id)');
+$insertRecipe = $mysqlClient->prepare('INSERT INTO comments(comment, recipe_id, user_id, review) VALUES (:comment, :recipe_id, :user_id, :review)');
 $insertRecipe->execute([
   'comment' => $comment,
   'recipe_id' => $recipeId,
   'user_id' => $_SESSION['LOGGED_USER']['user_id'],
+  'review' => $review,
 ])
 ?>
 
@@ -52,6 +60,7 @@ $insertRecipe->execute([
 
         <div class="card">
             <div class="card-body">
+                <p class="card-text"><b>Note</b> : <?php echo($review); ?> / 5</p>
                 <p class="card-text"><b>Votre commentaire</b> : <?php echo strip_tags($comment); ?></p>
             </div>
         </div>
